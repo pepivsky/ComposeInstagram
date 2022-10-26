@@ -82,7 +82,8 @@ fun ForgotPassWord(modifier: Modifier) {
     Text(
         text = "Forgot password?",
         color = Color(0xFF4EA8E9),
-        modifier = modifier
+        modifier = modifier,
+        fontWeight = FontWeight.Bold
     )
 }
 
@@ -117,10 +118,15 @@ fun SocialLogin() {
     Row(verticalAlignment = (Alignment.CenterVertically)) {
         Icon(
             painter = painterResource(id = R.drawable.icon_facebook),
-            contentDescription = "facebook icon"
+            contentDescription = "facebook icon",
+            tint = Color(0xFF4EA8E9)
         )
         Spacer(modifier = Modifier.size(8.dp))
-        Text(text = "Continue as Dave Johnson")
+        Text(
+            text = "Continue as Dave Johnson",
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF4EA8E9)
+        )
     }
 }
 
