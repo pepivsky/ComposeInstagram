@@ -136,10 +136,15 @@ fun ForgotPassWord(modifier: Modifier) {
 fun BtnLogin(loginEnable: Boolean) {
     Button(
         modifier = Modifier.fillMaxWidth(),
-        colors = ButtonDefaults.buttonColors(backgroundColor = Color.Blue),
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = Color(0xFF4EA8E9),
+            disabledBackgroundColor = Color(0xFF78C8F9),
+            contentColor = Color.White,
+            disabledContentColor = Color.White
+        ),
         enabled = loginEnable,
-        onClick = { /*TODO*/ }) {
-        Text(text = "Log In", color = Color.White)
+        onClick = { }) {
+        Text(text = "Log In")
     }
 }
 
