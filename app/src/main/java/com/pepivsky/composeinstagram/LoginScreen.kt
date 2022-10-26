@@ -4,9 +4,12 @@ import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -21,6 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.sp
 
 
@@ -61,20 +67,59 @@ fun ImageLogo() {
 
 @Composable
 fun Email(email: String, onTextChanged: (String) -> Unit) {
-    OutlinedTextField(
+    TextField(
         modifier = Modifier.fillMaxWidth(),
         value = email,
-        placeholder = { Text(text = "Phone number, username or email") },
-        onValueChange = { onTextChanged(it) })
+        placeholder = { Text(text = "Phone number, username or email", color = Color.Gray) },
+        onValueChange = { onTextChanged(it) },
+        maxLines = 1,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Color.Gray,
+            backgroundColor = Color(0x7000000),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        )
+    )
 }
 
 @Composable
 fun Password(password: String, onTextChanged: (String) -> Unit) {
-    OutlinedTextField(
+    var passwordVisibility by rememberSaveable {
+        mutableStateOf(false)
+    }
+    TextField(
         modifier = Modifier.fillMaxWidth(),
         value = password,
-        placeholder = { Text(text = "Password") },
-        onValueChange = { onTextChanged(it) })
+        placeholder = { Text(text = "Password", color = Color.Gray) },
+        onValueChange = { onTextChanged(it) },
+        maxLines = 1,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+        colors = TextFieldDefaults.textFieldColors(
+            textColor = Color(0xFFB2B2B2),
+            backgroundColor = Color(0x7000000),
+            focusedIndicatorColor = Color.Transparent,
+            unfocusedIndicatorColor = Color.Transparent
+        ),
+        // icono del textField
+        trailingIcon = {
+            val imagen = if (passwordVisibility) {
+                Icons.Filled.VisibilityOff
+            } else {
+                Icons.Filled.Visibility
+            }
+            // Composable icono que se puede clickear
+            IconButton(onClick = { passwordVisibility = !passwordVisibility }) {
+                Icon(imageVector = imagen, contentDescription = "show password")
+            }
+        },
+        // transforma el string a un enmascarado con puntos por defecto
+        visualTransformation = if (passwordVisibility) { // si el password es visible no lo transforma
+            VisualTransformation.None
+        } else {
+            PasswordVisualTransformation()
+        }
+    )
 }
 
 @Composable
