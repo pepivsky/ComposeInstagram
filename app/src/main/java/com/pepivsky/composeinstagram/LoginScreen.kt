@@ -134,9 +134,13 @@ fun Body(modifier: Modifier) {
     Column(modifier = modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         ImageLogo()
         Email(email = email, onTextChanged = { email = it })
+        Spacer(modifier = Modifier.size(12.dp))
         Password(password = password, onTextChanged = { password = it })
+        Spacer(modifier = Modifier.size(16.dp))
         ForgotPassWord(Modifier.align(Alignment.End))
+        Spacer(modifier = Modifier.size(16.dp))
         BtnLogin(isLoginEnable)
+        Spacer(modifier = Modifier.size(16.dp))
         LoginDivider()
         Spacer(modifier = Modifier.size(30.dp))
         SocialLogin()
@@ -158,9 +162,19 @@ fun Footer(modifier: Modifier) {
 @Composable
 fun SignUp() {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        Text(text = "Don't have an account?", fontSize = 12.sp, fontWeight = FontWeight.Bold,color = Color(0xFFB5B5B5) )
+        Text(
+            text = "Don't have an account?",
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFFB5B5B5)
+        )
         Spacer(modifier = Modifier.size(8.dp))
-        Text(text = "Sign Up.", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color(0xFF4EA8E9))
+        Text(
+            text = "Sign Up.",
+            fontSize = 12.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color(0xFF4EA8E9)
+        )
     }
 
 }
