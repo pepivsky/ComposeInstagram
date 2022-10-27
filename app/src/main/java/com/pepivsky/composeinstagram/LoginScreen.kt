@@ -1,6 +1,7 @@
 package com.pepivsky.composeinstagram
 
 import android.app.Activity
+import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -148,6 +149,12 @@ fun BtnLogin(loginEnable: Boolean) {
     }
 }
 
+// revisa si el email y el password son validos
+fun enableLogin(email: String, password: String): Boolean {
+    // revisa si el email es valido
+    return Patterns.EMAIL_ADDRESS.matcher(email).matches() && password.length > 6
+}
+
 
 @Composable
 fun LoginDivider() {
@@ -189,9 +196,17 @@ fun Body(modifier: Modifier) {
 
     Column(modifier = modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
         ImageLogo()
-        Email(email = email, onTextChanged = { email = it })
+        Email(email = email, onTextChanged = {
+            email = it
+            //check if email and password are valid, if true then isLoginEnable change to true and activate login button
+            isLoginEnable = enableLogin(email, password)
+        })
         Spacer(modifier = Modifier.size(12.dp))
-        Password(password = password, onTextChanged = { password = it })
+        Password(password = password, onTextChanged = {
+            password = it
+            //check if email and password are valid, if true then isLoginEnable change to true and activate login button
+            isLoginEnable = enableLogin(email, password)
+        })
         Spacer(modifier = Modifier.size(16.dp))
         ForgotPassWord(Modifier.align(Alignment.End))
         Spacer(modifier = Modifier.size(16.dp))
